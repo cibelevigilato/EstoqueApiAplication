@@ -18,16 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @author digma
  */
 @RestController
-public class ProdutoController {
+public class CategoriaController {
 
     @PersistenceContext
     private EntityManager manager;
-    
-    List<Produto> listaProduto;
+    List<Categoria> listaCategoria;
 
-    @GetMapping("/Produto")
-    public List<Produto> listas() {
+    @GetMapping("/categoria")
+    public List<Categoria> listas() {
 
-       return manager.createQuery("From Produto", Produto.class).getResultList();
+        listaCategoria = new ArrayList<Categoria>();
+
+        return manager.createQuery("From Categoria", Categoria.class).getResultList();
+
     }
 }
