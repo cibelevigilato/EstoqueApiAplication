@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 /**
  *
@@ -15,19 +16,13 @@ import jakarta.persistence.Id;
  */
 @Entity
 public class Categoria {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+   
     private long id;
-    private String Categoria;
-
-    public Categoria() {
-    }
-
-    public Categoria(long id, String Categoria) {
-        this.id = id;
-        this.Categoria = Categoria;
-    }
+    private String categoria;
 
     public long getId() {
         return id;
@@ -38,17 +33,25 @@ public class Categoria {
     }
 
     public String getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
-    public void setCategoria(String Categoria) {
-        this.Categoria = Categoria;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public Categoria(long id, String categoria) {
+        this.id = id;
+        this.categoria = categoria;
+    }
+
+    public Categoria() {
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 17 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -66,4 +69,5 @@ public class Categoria {
         final Categoria other = (Categoria) obj;
         return this.id == other.id;
     }
+
 }

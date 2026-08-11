@@ -6,11 +6,16 @@ package cibele.diva.EstoqueApiAplication.api.controller;
 
 import cibele.diva.EstoqueApiAplication.domain.model.Categoria;
 import cibele.diva.EstoqueApiAplication.domain.model.Produto;
+import cibele.diva.EstoqueApiAplication.domain.repository.CategoriaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,16 +25,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CategoriaController {
 
-    @PersistenceContext
-    private EntityManager manager;
-    List<Categoria> listaCategoria;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+    //List<Categoria> listaCategoria;
 
     @GetMapping("/categoria")
     public List<Categoria> listas() {
 
-        listaCategoria = new ArrayList<Categoria>();
+        return categoriaRepository.findAll();
 
-        return manager.createQuery("From Categoria", Categoria.class).getResultList();
+    }
+
+    @GetMapping("/Categoria/{categoriaID}")
+    public ResponseEntity<Categoria> buscar(@PathVariable Long categoriaID) {
+
+        Optional<Categoria> categoria = categoriaRepository.findById(categoriaID);
+        if (categoria.isPresent()) {
+            return ResponseEntity.ok(categoria.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 }
