@@ -9,6 +9,7 @@ import cibele.diva.EstoqueApiAplication.domain.model.Produto;
 import cibele.diva.EstoqueApiAplication.domain.repository.CategoriaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,7 +39,7 @@ public class CategoriaController {
 
     }
 
-    @GetMapping("/Categoria/{categoriaID}")
+    @GetMapping("/categoria/{categoriaID}")
     public ResponseEntity<Categoria> buscar(@PathVariable Long categoriaID) {
 
         Optional<Categoria> categoria = categoriaRepository.findById(categoriaID);
@@ -47,4 +50,23 @@ public class CategoriaController {
         }
 
     }
+
+@PutMapping("/categoria/{categoriaID}")
+public ResponseEntity<Categoria> atualizar(@Valid @PathVariable Long categoriaID,@RequestBody Categoria categoria) {
+        
+    //verifica se o produto ja existe 
+    
+    if (!categoriaRepository.existsById(categoriaID)) {
+        return ResponseEntity.notFound().build();
+        
+    }
+   categoria.setId(categoriaID);
+   categoria = categoriaRepository.save(categoria);
+   return ResponseEntity.ok(categoria);
+    
+
+
+
+
+}
 }

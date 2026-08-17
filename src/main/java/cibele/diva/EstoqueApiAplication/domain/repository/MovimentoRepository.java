@@ -4,9 +4,9 @@
  */
 package cibele.diva.EstoqueApiAplication.domain.repository;
 
-import cibele.diva.EstoqueApiAplication.domain.model.Produto;
+import cibele.diva.EstoqueApiAplication.domain.model.Movimento;
+import java.util.Date;
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,9 +14,11 @@ import org.springframework.stereotype.Repository;
  * @author digma
  */
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-    List<Produto> findByNome (String nome);
-    
-    List<Produto> findByNomeContaining (String nome);
-    
+public interface MovimentoRepository {
+
+    List<Movimento> findById(Long id);
+
+    List<Movimento> findByDate(Date data_movto);
+
+    List<Movimento> findByQtd(Long qtd);
 }

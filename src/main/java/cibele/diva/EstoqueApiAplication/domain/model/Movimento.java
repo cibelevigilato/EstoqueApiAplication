@@ -9,41 +9,40 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-import java.math.BigDecimal;
+import jakarta.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  *
  * @author digma
  */
 @Entity
-public class Produto {
+public class Movimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotBlank
-    private String nome;
-
-    @NotBlank
-    private long id_categoria;
-    @NotBlank
-    private long saldo;
-
-    public void atualizaSaldo(Double qtd) {
-        this.saldo = this.add(BigDecimal.valueOf(qtd));
-    }
     
     
-    public Produto() {
+    @NotNull
+    @ManyToOne
+    private long id_produto;
+    
+     
+    
+    private long qtd;
+     
+     @NotNull
+     private  Date data_movto;
+
+    public Movimento() {
     }
 
-    public Produto(long id, String nome, long id_categoria, long saldo) {
+    public Movimento(long id, long id_produto, long qtd, Date data_movto) {
         this.id = id;
-        this.nome = nome;
-        this.id_categoria = id_categoria;
-        this.saldo = saldo;
+        this.id_produto = id_produto;
+        this.qtd = qtd;
+        this.data_movto = data_movto;
     }
 
     public long getId() {
@@ -54,34 +53,34 @@ public class Produto {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public long getId_produto() {
+        return id_produto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setId_produto(long id_produto) {
+        this.id_produto = id_produto;
     }
 
-    public long getId_categoria() {
-        return id_categoria;
+    public long getQtd() {
+        return qtd;
     }
 
-    public void setId_categoria(long id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setQtd(long qtd) {
+        this.qtd = qtd;
     }
 
-    public long getSaldo() {
-        return saldo;
+    public Date getData_movto() {
+        return data_movto;
     }
 
-    public void setSaldo(long saldo) {
-        this.saldo = saldo;
+    public void setData_movto(Date data_movto) {
+        this.data_movto = data_movto;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -96,7 +95,10 @@ public class Produto {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Produto other = (Produto) obj;
+        final Movimento other = (Movimento) obj;
         return this.id == other.id;
     }
+
+     
+     
 }
