@@ -8,8 +8,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -21,29 +24,26 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank
     private String nome;
 
-    @NotBlank
-    private long id_categoria;
-    @NotBlank
-    private long saldo;
+    @NotNull
+    private Long id_categoria;
+      
+    @NotNull
+    private BigDecimal saldo;
+    
+    @NotNull
+    private BigDecimal valor_unitario;
 
+   
     public void atualizaSaldo(Double qtd) {
-        this.saldo = this.add(BigDecimal.valueOf(qtd));
-    }
-    
-    
-    public Produto() {
+        this.saldo = this.saldo.add(BigDecimal.valueOf(qtd));
     }
 
-    public Produto(long id, String nome, long id_categoria, long saldo) {
-        this.id = id;
-        this.nome = nome;
-        this.id_categoria = id_categoria;
-        this.saldo = saldo;
+    public Produto() {
     }
 
     public long getId() {
@@ -70,18 +70,29 @@ public class Produto {
         this.id_categoria = id_categoria;
     }
 
-    public long getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 
+    public BigDecimal getValor_unitario() {
+        return valor_unitario;
+    }
+
+    public void setValor_unitario(BigDecimal valor_unitario) {
+        this.valor_unitario = valor_unitario;
+    }
+    
+   
+    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -100,3 +111,6 @@ public class Produto {
         return this.id == other.id;
     }
 }
+    
+    
+    

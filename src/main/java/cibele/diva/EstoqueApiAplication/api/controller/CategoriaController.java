@@ -5,12 +5,8 @@
 package cibele.diva.EstoqueApiAplication.api.controller;
 
 import cibele.diva.EstoqueApiAplication.domain.model.Categoria;
-import cibele.diva.EstoqueApiAplication.domain.model.Produto;
 import cibele.diva.EstoqueApiAplication.domain.repository.CategoriaRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

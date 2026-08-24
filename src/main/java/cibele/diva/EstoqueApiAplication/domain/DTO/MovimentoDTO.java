@@ -13,10 +13,9 @@ import jakarta.validation.constraints.NotNull;
  */
 public class MovimentoDTO {
     @NotNull
-    Long idProduto;
+    private Long idProduto;
     
     @NotNull
-    @Column(name = "qtd")
     Double quantidade;
 
     public MovimentoDTO() {

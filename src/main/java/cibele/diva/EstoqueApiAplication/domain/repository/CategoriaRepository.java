@@ -5,7 +5,6 @@
 package cibele.diva.EstoqueApiAplication.domain.repository;
 
 import cibele.diva.EstoqueApiAplication.domain.model.Categoria;
-import cibele.diva.EstoqueApiAplication.domain.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
