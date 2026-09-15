@@ -13,10 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- *
- * @author digma
- */
+
 @Entity
 public class Movimento {
 
@@ -39,6 +36,10 @@ public class Movimento {
      private Produto produto;
      
      public Movimento() {
+    }
+
+    public Produto getProduto() {
+        return produto;
     }
 
      public Movimento (Produto produto, Double qtd) {

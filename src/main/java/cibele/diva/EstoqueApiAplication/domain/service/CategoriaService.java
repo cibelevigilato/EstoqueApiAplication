@@ -4,7 +4,9 @@
  */
 package cibele.diva.EstoqueApiAplication.domain.service;
 
+import cibele.diva.EstoqueApiAplication.domain.model.Categoria;
 import cibele.diva.EstoqueApiAplication.domain.model.Produto;
+import cibele.diva.EstoqueApiAplication.domain.repository.CategoriaRepository;
 import cibele.diva.EstoqueApiAplication.domain.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import java.util.Optional;
@@ -15,29 +17,30 @@ import org.springframework.stereotype.Service;
  *
  * @author digma
  */
+
 @Service
-public class ProdutoService {
+public class CategoriaService {
+     private final CategoriaRepository categoriaRepository;
 
-    private final ProdutoRepository produtoRepository;
-
-    public ProdutoService(ProdutoRepository produtoRepository) {
-        this.produtoRepository = produtoRepository;
+    public CategoriaService(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
     }
 
     @Transactional
-    public Produto salvar(Produto produto) {
+    public Categoria salvar(Categoria categoria) {
         // Exemplo de regra de negócio futura:
         // if (produtoRepository.existsByNome(produto.getNome())) { throw Exception... }
-        return produtoRepository.save(produto);
+        return categoriaRepository.save(categoria);
     }
 
     @Transactional
-    public Optional<Produto> atualizar(Long produtoId, Produto produtoComNovosDados) {
-        return produtoRepository.findById(produtoId)
-                .map(produtoExistente -> {
+    public Optional<Categoria> atualizar(Long categoriaID, Categoria CategoriaComNovosDados) {
+        return categoriaRepository.findById(categoriaID)
+                .map(categoriaExistente -> {
                     // Copia os dados recebidos para o produto buscado no banco, ignorando a chave primária
-                    BeanUtils.copyProperties(produtoComNovosDados, produtoExistente, "id");
-                    return produtoRepository.save(produtoExistente);
+                    BeanUtils.copyProperties(CategoriaComNovosDados, categoriaExistente, "id");
+                    return categoriaRepository.save(categoriaExistente);
                 });
     }
 }
+
