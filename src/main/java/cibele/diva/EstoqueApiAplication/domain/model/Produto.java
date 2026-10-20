@@ -30,8 +30,9 @@ public class Produto {
     @NotBlank
     private String nome;
 
-    @NotNull
-    private Long id_categoria;
+    @ManyToOne
+    @JoinColumn(name="id_categoria")
+    private Categoria categoria;
       
     
     private BigDecimal saldo;
@@ -63,12 +64,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public long getId_categoria() {
-        return id_categoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setId_categoria(long id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public BigDecimal getSaldo() {
@@ -79,11 +80,11 @@ public class Produto {
         this.saldo = saldo;
     }
 
-    public BigDecimal getValor_unitario() {
+    public BigDecimal getValorUnitario() {
         return valor_unitario;
     }
 
-    public void setValor_unitario(BigDecimal valor_unitario) {
+    public void setValorUnitario(BigDecimal valor_unitario) {
         this.valor_unitario = valor_unitario;
     }
     

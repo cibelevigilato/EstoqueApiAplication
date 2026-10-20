@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author digma
  */
-@RestController("/produtos")
+@RestController
 public class ProdutoController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
 //--- Listar todos os produtos ---------
-    @GetMapping("produtos")
+    @GetMapping("/produtos")
     public List<Produto> listas() {
 
         return produtoRepository.findAll();
